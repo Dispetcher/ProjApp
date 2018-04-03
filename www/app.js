@@ -4,7 +4,7 @@ app.controller("table", function($scope, $http){
 	$http.post("database.php").then( function(response){
 		$scope.companies = response.data;
 
-	/**** Pagnation - нумерация 
+	/**** Pagination - нумерация 
 	======================================
 	*****/
 		let cl = $scope.companies.length;
@@ -26,19 +26,19 @@ app.controller("table", function($scope, $http){
 	
 	setTimeout(function(){
 		hideorg();
-		pagnate(1);
+		paginate(1, 0);
 	}, 400);
 
 	while ( angular.element(document.querySelectorAll(".main tbody tr")) < 0){
 		setTimeout(function(){
 		hideorg();
-		pagnate(1);
+		paginate(1, 0);
 		}, 400);
 	}
 	if (angular.element(document.querySelectorAll(".main tbody tr")) > 0){
 		setTimeout(function(){
 		hideorg();
-		pagnate(1);
+		paginate(1, 0);
 		}, 100);
 	}
 
@@ -49,6 +49,15 @@ app.controller("table", function($scope, $http){
 	$scope.open_more = function(num){
 		var pages = angular.element(document.querySelectorAll(".btm_cell"));
 		var curr = parseInt(angular.element(document.querySelector('.curr')).html()); 
+		var comp_show = angular.element(document.querySelectorAll(".item.body"));
+
+		let lc = comp_show.length;
+			if (lc%30 > 0){
+				var len_c = (lc - lc%30) / 30 + 1;
+			}else{
+				var len_c = (lc - lc%30) / 30;
+			}
+
 
 		if(window.innerWidth > 1023){
 
@@ -78,7 +87,7 @@ app.controller("table", function($scope, $http){
 		if(num){
 			showmore(a, b);
 		}
-		pagnate(num);
+		paginate(num, len_c);
 	}
 
 	function showmore(n_st, n_fin){
@@ -103,49 +112,59 @@ app.controller("table", function($scope, $http){
 	===================================
 	**************/
 
-	function pagnate(n){
+	function paginate(n, len_c){
 		var pgs = angular.element(document.querySelectorAll(".btm_cell"));
 		var len = pgs.length;
 
-			if(n == len-6){
-				rmvclass(pgs,len)
-				pgs.eq(len-3).addClass('curr');
-			}else{
-				rmvclass(pgs,len)
-				pgs.eq(n+2).addClass('curr');
-			}
+		if(n == len-6){
+			rmvclass(pgs,len)
+			pgs.eq(len-3).addClass('curr');
+		}else{
+			rmvclass(pgs,len)
+			pgs.eq(n+2).addClass('curr');
+		}
 
-		if(window.innerWidth > 1023){
-			if(n == 1){
+		if(len_c == 0 || len_c == len-6){
+			if(window.innerWidth > 1023){
+				if(n == 1){
+					showall(pgs);
+					hideafter(pgs,n);
+					pgs.eq(0).css('display', 'none');
+					pgs.eq(1).css('display', 'none');
+					pgs.eq(2).css('display', 'none');
+				}else if(n == 2){
+					showall(pgs);
+					hideafter(pgs,n);
+					pgs.eq(0).css('display', 'none');
+					pgs.eq(2).css('display', 'none');
+				}else if(n == len-8){
+					showall(pgs);
+					hidebefore(pgs,n);
+					pgs.eq(len-4).css('display', 'none');
+				}else if(n == len-7){
+					showall(pgs);
+					hidebefore(pgs,n);
+					pgs.eq(len-4).css('display', 'none');
+					pgs.eq(len-1).css('display', 'none');
+				}else if(n == len-6){
+					showall(pgs);
+					hidebefore(pgs,n);
+					pgs.eq(len-4).css('display', 'none');
+					pgs.eq(len-2).css('display', 'none');
+					pgs.eq(len-1).css('display', 'none');
+				}else{
+					showall(pgs);
+					hidebefore(pgs,n);
+					hideafter(pgs,n);
+				}
+			}else{
 				showall(pgs);
-				hideafter(pgs,n);
 				pgs.eq(0).css('display', 'none');
 				pgs.eq(1).css('display', 'none');
 				pgs.eq(2).css('display', 'none');
-			}else if(n == 2){
-				showall(pgs);
-				hideafter(pgs,n);
-				pgs.eq(0).css('display', 'none');
-				pgs.eq(2).css('display', 'none');
-			}else if(n == len-8){
-				showall(pgs);
-				hidebefore(pgs,n);
-				pgs.eq(len-4).css('display', 'none');
-			}else if(n == len-7){
-				showall(pgs);
-				hidebefore(pgs,n);
-				pgs.eq(len-4).css('display', 'none');
-				pgs.eq(len-1).css('display', 'none');
-			}else if(n == len-6){
-				showall(pgs);
-				hidebefore(pgs,n);
 				pgs.eq(len-4).css('display', 'none');
 				pgs.eq(len-2).css('display', 'none');
 				pgs.eq(len-1).css('display', 'none');
-			}else{
-				showall(pgs);
-				hidebefore(pgs,n);
-				hideafter(pgs,n);
 			}
 		}else{
 			showall(pgs);
@@ -155,8 +174,11 @@ app.controller("table", function($scope, $http){
 			pgs.eq(len-4).css('display', 'none');
 			pgs.eq(len-2).css('display', 'none');
 			pgs.eq(len-1).css('display', 'none');
+			for(let i=len_c+3; i<len; i++){
+				pgs.eq(i).css('display', 'none');
+			}
 		}
-	}
+	}	
 
 	/************ Удаляем класс со всех страниц **************/
 
@@ -307,6 +329,18 @@ app.controller("table", function($scope, $http){
 		})
 
 	}
+
+	function hidebtmcell(){
+		var comp_show = angular.element(document.querySelectorAll(".item.body"));
+
+			let lc = comp_show.length;
+			if (lc%30 > 0){
+				var len_c = (lc - lc%30) / 30 + 1;
+			}else{
+				var len_c = (lc - lc%30) / 30;
+			}
+			paginate(1, len_c);
+	}
 });
 	/**** Custom filters 
 	======================================
@@ -356,7 +390,7 @@ app.filter('filterByName', function(){
 		if(items.length > 0){
 			for (let i = 0; i < items.length; i++){
 				var item = items[i];
-				if (item.MEMBERNAME.indexOf(cond) != -1){
+				if (item.MEMBERNAME.toLowerCase().indexOf(cond.toLowerCase()) != -1){
 					list.push(item); 
 				} 
 			}
