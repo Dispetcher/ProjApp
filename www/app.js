@@ -39,7 +39,7 @@ app.controller("table", function($scope, $http){
 		setTimeout(function(){
 		hideorg();
 		paginate(1, 0);
-		}, 100);
+		}, 400);
 	}
 
 
@@ -224,6 +224,72 @@ app.controller("table", function($scope, $http){
 	$scope.hidefunc = function(){
 		angular.element(document.querySelector("#popup_table")).css("display", "none");
 	}
+
+/*********************** Открытие организации из поиска
+=================================================================================
+************************/
+	var lnk = window.location.href;
+	if(lnk.indexOf('#id-')!= -1){
+		let indx = lnk.indexOf('id-') + 3;
+		let cid = parseInt(lnk.slice(indx));
+		details(cid);
+	}
+
+	function details(id){
+		var request = $http({
+			method: "post",
+			url: "list.php",
+			data: {
+				'id': id
+				},
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+		});
+		request.then(function(response){
+			var orgname = response.data;
+			var nm = orgname[0];
+			$scope.org_name = nm['MEMBERNAME'];
+		});
+
+		/**  Получаем имя в заголовок на всплюывающем окне **/	
+		var request = $http({
+			method: "post",
+			url: "one_upload.php",
+			data: {
+				'id': id
+				},
+			headers: { 'Content-Type': 'application/x-www-form-urlencoded'}
+		});
+		request.then(function(response){
+			$scope.comp_details = response.data;
+		});		
+
+		setTimeout(mergecells,200);
+		setTimeout(mergecells,500);
+		setTimeout(mergecells,1000);
+
+		/******* Для медленных соединений **********/
+		setTimeout(mergecells,3500);
+		setTimeout(mergecells,5000);
+
+		/**** Отслеживание нажатий, установка положения кнопки вверх 
+		======================================
+		*****/
+		
+		angular.element(document.querySelector("#popup_table")).css("display", "block");	
+		angular.element(document.querySelector(".to_top")).css("right", "60px");	
+
+		/**** Установка положения окна в 0,0 
+		======================================
+		*****/	
+		/*var pos = angular.element(document.querySelectorAll('.popup')).prop('offsetTop');*/
+		var w = window.innerWidth;
+		if (w < 420){
+			window.scrollTo(0, 395);
+		}else{
+			window.scrollTo(0, 360);
+		}
+		
+	};
 
 	/**** Запрос при нажатии 
 	======================================
