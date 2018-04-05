@@ -6,7 +6,7 @@
                 e.preventDefault();
                 var indx = link.indexOf('details/');
                 let id = link.slice(21);
-                $(location).attr('href', 'http://metrotunnel.ru/reestr/#id-'+id);
+                $(location).attr('href', 'http://proekttunnel.ru/reestr/#id-'+id);
             }
         });
     });

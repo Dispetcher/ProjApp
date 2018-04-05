@@ -4,11 +4,11 @@ Template Name: Реестр на Angular
 */
 get_header();?>
     <div class="content_bg" ng-app="app" ng-controller="table">
-		 <div id="popup_table">
-             <div ng-include="'/wp-content/angapp/php/form.php'"></div>
-              <div class="backgr" ng-click="hidefunc()"></div>
-         </div>
-		
+        <div id="popup_table">
+            <div ng-include="'/wp-content/projapp/php/form.php'"></div>
+            <div class="backgr" ng-click="hidefunc()"></div>
+        </div>
+
         <?php get_template_part('includes/breadcrumbs');?>
         <div id="content_section">
             <div class="center_wrap">
@@ -17,8 +17,8 @@ get_header();?>
                     <div class="dtc vat page_content_reestr" id="page_content">
                         <div class="page_content">
                             <h1><?php if(get_field('seo_h1')): echo the_field('seo_h1'); else: the_title(''); endif;?></h1>
-                            <div class="page_content_orgnumbers">
-                               По состоянию на <?php echo date(get_option('date_format')); ?> года количество действующих членов СРО &mdash; <?php echo get_post_meta($post->ID, 'orgnumber', true); ?>
+                            <div class="page_content_orgnumber">
+                                По состоянию на <?php echo date(get_option('date_format')); ?> года количество действующих членов СРО &mdash; <?php echo get_post_meta($post->ID, 'orgnumber', true); ?>
                             </div>
 
                             <div>
@@ -37,11 +37,11 @@ get_header();?>
                                         <td class="agent_id" ng-show="agent.show"><input type="text" ng-model="agent_id"></td>
                                         <td><input type="search" ng-model="num_r" class="small num_r"></td>
                                         <td><select name= "status" ng-model="status">
-												<option value="Все члены">Все члены</option>
-                								<option value="Член СРО">Член СРО</option>
-               									<option value="Исключен">Исключен</option>
-          									</select>
-										</td>
+                                                <option value="Все члены">Все члены</option>
+                                                <option value="Член СРО">Член СРО</option>
+                                                <option value="Исключен">Исключен</option>
+                                            </select>
+                                        </td>
                                         <td><input type="search" ng-model="name" class="big"></td>
                                         <td><input type="search" ng-model="inn" class="small inn"></td>
                                         <td><input type="search" ng-model="ogrn" class="small ogrn"></td>
@@ -59,15 +59,15 @@ get_header();?>
                                     </tbody>
                                 </table>
                             </div>
-							<div class="bottom_table">
-								<div class="btm_cell serv_cells tostart" ng-click="open_more(1)"> в начало </div>
-								<div class="btm_cell serv_cells" ng-click="open_more('prev')"> предыдущая </div>
-								<div class="btm_cell serv_cells" ng-click="open_more('empty')"> .. </div>
-								<div class="btm_cell" ng-repeat="num in row" ng-click="open_more(num)">{{num}}</div>
-								<div class="btm_cell serv_cells" ng-click="open_more('next')"> следующая </div>
-								<div class="btm_cell serv_cells toend" ng-click="open_more('max')"> в конец </div>
-                      	  </div>
-							
+                            <div class="bottom_table">
+                                <div class="btm_cell serv_cells tostart" ng-click="open_more(1)"> в начало </div>
+                                <div class="btm_cell serv_cells" ng-click="open_more('prev')"> предыдущая </div>
+                                <div class="btm_cell serv_cells" ng-click="open_more('empty')"> .. </div>
+                                <div class="btm_cell" ng-repeat="num in row" ng-click="open_more(num)">{{num}}</div>
+                                <div class="btm_cell serv_cells" ng-click="open_more('next')"> следующая </div>
+                                <div class="btm_cell serv_cells toend" ng-click="open_more('max')"> в конец </div>
+                            </div>
+
                         </div><!--/.page_content-->
                         <div class="page_content_underreestr">
                             <p>
@@ -81,7 +81,7 @@ get_header();?>
                             </p>
                         </div>
                         <p class="page_date date_reestr">Дата создания страницы: <?php the_time('d.m.Y H:i')?></p>
-                        <p class="page_date_modified">Дата изменения страницы: <?php echo date(get_option('date_format'));?> 08:25<?php// the_modified_time('d.m.Y H:i')?></p>
+                        <p class="page_date_modified">Дата изменения страницы: <?php echo date(get_option('date_format'));?> 06:35<?php// the_modified_time('d.m.Y H:i')?></p>
                     </div><!--/#page_content-->
                 </div><!--/.dt-->
             </div><!--/.center_wrap-->
