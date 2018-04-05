@@ -25,7 +25,7 @@ if(!$con){
 
 mysqli_set_charset($con, 'utf8');
 
-$sql = "SELECT `MEMBERNAME` FROM `es_metrotunnel_list` WHERE `ID_AGENT`=$sql_id";
+$sql = "SELECT `MEMBERNAME` FROM `es_proekttunnel_list` WHERE `ID_AGENT`=$sql_id";
 
 /*Делаем запрос в БД*/
 $res = mysqli_query($con, $sql);
