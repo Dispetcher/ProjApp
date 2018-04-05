@@ -22,6 +22,15 @@ app.controller("table", function($scope, $http){
 			arr.push(i); 
 		};
 		$scope.row = arr;
+
+		var orgin_arr = [];
+		for(let i=0; i<cl; i++){
+			var el_arr = $scope.companies[i];
+			if(el_arr['AGENTSTATUSE'] == 'Член СРО'){
+				orgin_arr.push(el_arr);
+			}
+		}
+		$scope.orgin = orgin_arr.length;
 	});
 	
 	setTimeout(function(){
