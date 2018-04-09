@@ -1,3 +1,7 @@
+/* @Dispetcher Last edited 06.04 
+=================================
+*/
+
 var app = angular.module("app",[]);
 
 app.controller("table", function($scope, $http){
@@ -51,6 +55,7 @@ app.controller("table", function($scope, $http){
 		}, 400);
 	}
 
+	$scope.printver = 'Печатная версия';
 
 	/**** Переход на другую страницу
 	=================================== 
@@ -240,8 +245,39 @@ app.controller("table", function($scope, $http){
 	var lnk = window.location.href;
 	if(lnk.indexOf('#id-')!= -1){
 		let indx = lnk.indexOf('id-') + 3;
-		let cid = parseInt(lnk.slice(indx));
+		var cid = parseInt(lnk.slice(indx));
 		details(cid);
+
+		/********************Печатная версия карточки
+	=====================
+	*********************/
+		setTimeout(function(){
+            let lnk = window.location.href;
+            let indx = lnk.indexOf('id-') + 3;
+		    let cid = parseInt(lnk.slice(indx));
+            let linkid = 'http://www.metrotunnel.ru/reestr/printver/#id-' + cid;
+		    angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
+			angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
+		}, 1000);
+
+		setTimeout(function(){
+            let lnk = window.location.href;
+            let indx = lnk.indexOf('id-') + 3;
+		    let cid = parseInt(lnk.slice(indx));
+            let linkid = 'http://www.metrotunnel.ru/reestr/printver/#id-' + cid;
+		    angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
+			angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
+		}, 3500);
+
+		setTimeout(function(){
+            let lnk = window.location.href;
+            let indx = lnk.indexOf('id-') + 3;
+		    let cid = parseInt(lnk.slice(indx));
+            let linkid = 'http://www.metrotunnel.ru/reestr/printver/#id-' + cid;
+		    angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
+			angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
+		}, 6000);
+
 	}
 
 	function details(id){
@@ -272,6 +308,7 @@ app.controller("table", function($scope, $http){
 			$scope.comp_details = response.data;
 		});		
 
+		setTimeout(mergecells,50);
 		setTimeout(mergecells,200);
 		setTimeout(mergecells,500);
 		setTimeout(mergecells,1000);
@@ -297,7 +334,7 @@ app.controller("table", function($scope, $http){
 		}else{
 			window.scrollTo(0, 360);
 		}
-		
+	
 	};
 
 	/**** Запрос при нажатии 
@@ -329,24 +366,30 @@ app.controller("table", function($scope, $http){
 		setTimeout(mergecells,3500);
 		setTimeout(mergecells,5000);
 
-	/**** Отслеживание нажатий, установка положения кнопки вверх 
-	======================================
-	*****/
-	
-	angular.element(document.querySelector("#popup_table")).css("display", "block");	
-	angular.element(document.querySelector(".to_top")).css("right", "60px");	
+		/**** Отслеживание нажатий, установка положения кнопки вверх 
+		======================================
+		*****/
+		
+		angular.element(document.querySelector("#popup_table")).css("display", "block");	
+		angular.element(document.querySelector(".to_top")).css("right", "60px");	
 
-	/**** Установка положения окна в 0,0 
-	======================================
-	*****/	
-	/*var pos = angular.element(document.querySelectorAll('.popup')).prop('offsetTop');*/
-	var w = window.innerWidth;
-	if (w < 420){
-		window.scrollTo(0, 395);
-	}else{
-		window.scrollTo(0, 360);
-	}
-	
+		/**** Установка положения окна в 0,0 
+		======================================
+		*****/	
+		/*var pos = angular.element(document.querySelectorAll('.popup')).prop('offsetTop');*/
+		var w = window.innerWidth;
+		if (w < 420){
+			window.scrollTo(0, 395);
+		}else{
+			window.scrollTo(0, 360);
+		}
+
+	/********************Печатная версия карточки
+	=====================
+	*********************/
+		var linkid = 'http://www.metrotunnel.ru/reestr/printver/#id-' + id;
+		angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
+
 	};
 	/****(Окончание) Отслеживание нажатий, установка положения кнопки вверх 
 	======================================

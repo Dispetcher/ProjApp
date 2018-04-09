@@ -1,3 +1,7 @@
+/* @Dispetcher Last edited 09.04 
+=================================
+*/
+
 input[type=search], select{
         border-radius:5px;
 }
@@ -118,6 +122,21 @@ h4{
 .popup_header{
     background-color: #a2d4ee;
 }
+.print_win{
+	top: 0;
+}
+#linkprint{
+	position: absolute;
+	top:  5px;
+	padding: 4px 5px 5px 23px;
+	color: #222;
+	font-style: italic;
+	font-weight: 600;
+}
+.lnkprint span img{
+    position: absolute;
+    top: 8px;
+}
 /*******  Close btn         ********/
 .close{
 	position:absolute;
@@ -148,6 +167,7 @@ h4{
 .header_name{
 	font-size: 14pt;
 	font-weight: 600;
+	margin-top: 15px;
 	margin-bottom: 15px;
 }
 .form_col_ext{
@@ -158,7 +178,15 @@ h4{
 }
 
 /*****
-======Pagnation===========
+====== Print Version ===========
+*****/
+
+.table_print{
+	border: 4px solid #eee;
+}
+
+/*****
+======Pagination===========
 *****/
 .bottom_table{
 	margin-top:20px;
@@ -245,7 +273,7 @@ h4{
         min-width:auto;
     }
     .header_name{
-        margin-top:20px;
+        margin-top:40px;
     }
 }
 @media(max-width: 540px){
@@ -314,6 +342,9 @@ h4{
 		width:27px;
 		margin: 10px 2px;
 	}
+	#linkprint{
+        font-size:13px;
+    }
 }
 /* Iphone 6/7/8/X - w375*/
 @media(max-width:380px){
