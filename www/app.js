@@ -55,7 +55,7 @@ app.controller("table", function($scope, $http){
 		}, 400);
 	}
 
-	$scope.printver = 'Печатная версия';
+	$scope.printver = 'Версия для печати';
 
 	/**** Переход на другую страницу
 	=================================== 

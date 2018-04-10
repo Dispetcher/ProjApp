@@ -1,4 +1,4 @@
-/* @Dispetcher Last edited 09.04 
+/* @Dispetcher Last edited 10.04 
 =================================
 */
 
@@ -130,8 +130,8 @@ h4{
 	top:  5px;
 	padding: 4px 5px 5px 23px;
 	color: #222;
-	font-style: italic;
-	font-weight: 600;
+	/*font-style: italic;
+	font-weight: 600;*/
 }
 .lnkprint span img{
     position: absolute;
