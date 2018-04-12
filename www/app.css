@@ -111,7 +111,7 @@ tbody tr td {
   z-index: 10;
 }
 
-.popup table tr {
+.popup table tr:nth-child(odd) {
   background-color: #e2eaed;
 }
 
