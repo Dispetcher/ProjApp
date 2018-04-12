@@ -111,11 +111,11 @@ tbody tr td {
   z-index: 10;
 }
 
-.popup .table tr:nth-child(odd) {
+.popup table tr {
   background-color: #e2eaed;
 }
 
-.popup .table tr:nth-child(odd) td {
+.popup table tr td {
   padding: 10px;
   text-align: center;
   font-size: 12pt;
