@@ -1,4 +1,4 @@
-/* @Dispetcher Last edited 06.04 
+/* @Dispetcher Last edited 06.07 
 =================================
 */
 
@@ -255,7 +255,7 @@ app.controller("table", function($scope, $http){
             let lnk = window.location.href;
             let indx = lnk.indexOf('id-') + 3;
 		    let cid = parseInt(lnk.slice(indx));
-            let linkid = 'http://www.metrotunnel.ru/reestr/printver/#id-' + cid;
+            let linkid = 'https://www.metrotunnel.ru/reestr/printver/#id-' + cid;
 		    angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
 			angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
 		}, 1000);
@@ -264,7 +264,7 @@ app.controller("table", function($scope, $http){
             let lnk = window.location.href;
             let indx = lnk.indexOf('id-') + 3;
 		    let cid = parseInt(lnk.slice(indx));
-            let linkid = 'http://www.metrotunnel.ru/reestr/printver/#id-' + cid;
+            let linkid = 'https://www.metrotunnel.ru/reestr/printver/#id-' + cid;
 		    angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
 			angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
 		}, 3500);
@@ -273,7 +273,7 @@ app.controller("table", function($scope, $http){
             let lnk = window.location.href;
             let indx = lnk.indexOf('id-') + 3;
 		    let cid = parseInt(lnk.slice(indx));
-            let linkid = 'http://www.metrotunnel.ru/reestr/printver/#id-' + cid;
+            let linkid = 'https://www.metrotunnel.ru/reestr/printver/#id-' + cid;
 		    angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
 			angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
 		}, 6000);

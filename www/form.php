@@ -3,7 +3,7 @@
 			<span class="close" ng-click="hide()"></span>
 		</div>	
 		<div class="lnkprint">
-			<span><img src="http://www.proekttunnel.ru/wp-content/projapp/img/printer_icon.png" alt="Print Version"><a href="#" target="_blank" id="linkprint">{{printver}}</a></span>
+			<span><img src="https://www.proekttunnel.ru/wp-content/projapp/img/printer_icon.png" alt="Print Version"><a href="#" target="_blank" id="linkprint">{{printver}}</a></span>
 		</div>
 		
 	<table>
