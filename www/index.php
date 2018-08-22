@@ -40,7 +40,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr class="item body" ng-repeat="c in companies | filterByNum: num_r | filterByStatus: status | filterByName: name | filterByINN: inn | filterByOGRN: ogrn | orderBy: 'REESTR_NUM' " ng-click="func(c.ID_AGENT, c.MEMBERNAME)">
+        <tr class="item body" ng-repeat="c in companies | filterByNum: num_r | filterByStatus: status | filterByName: name | filterByINN: inn | filterByOGRN: ogrn | orderBy: 'REESTR_NUM' " ng-click="func(c.ID_AGENT, c.MEMBERNAME)" on-finish-render="hideorg(); paginate(1,0);">
             <td class="agent_id" ng-show="agent.show">{{c.ID_AGENT}}</td>
             <td>{{c.REESTR_NUM}}</td>
             <td>{{c.AGENTSTATUSE}}</td>

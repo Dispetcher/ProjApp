@@ -1,4 +1,4 @@
-/* @Dispetcher Last edited 10.04 
+/* @Dispetcher Last edited 02.07 
 =================================
 */
 
@@ -40,10 +40,10 @@ app.controller("table", function($scope, $http){
 	/**** Запуск функций нумерации и скрытия организаций более 30
 	=================================== 
 	*****/
-	window.onload = function(){
-		hideorg();
-		paginate(1, 0);
-	}
+	$scope.$on('ngRepeatFinished', function() {
+           hideorg();
+           paginate(1, 0);
+ 	});
 
 	$scope.printver = 'Версия для печати';
 
