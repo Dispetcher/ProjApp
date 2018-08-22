@@ -1,11 +1,11 @@
-/* @Dispetcher Last edited 06.07 
+/* @Dispetcher Last edited 10.04 
 =================================
 */
 
 var app = angular.module("app",[]);
 
 app.controller("table", function($scope, $http){
-	$http.post("database.php").then( function(response){
+	$http.post("https://www.proekttunnel.ru/wp-content/projapp/php/database.php").then( function(response){
 		$scope.companies = response.data;
 
 	/**** Pagination - нумерация 
@@ -37,22 +37,12 @@ app.controller("table", function($scope, $http){
 		$scope.orgin = orgin_arr.length;
 	});
 	
-	setTimeout(function(){
+	/**** Запуск функций нумерации и скрытия организаций более 30
+	=================================== 
+	*****/
+	window.onload = function(){
 		hideorg();
 		paginate(1, 0);
-	}, 400);
-
-	while ( angular.element(document.querySelectorAll(".main tbody tr")) < 0){
-		setTimeout(function(){
-		hideorg();
-		paginate(1, 0);
-		}, 400);
-	}
-	if (angular.element(document.querySelectorAll(".main tbody tr")) > 0){
-		setTimeout(function(){
-		hideorg();
-		paginate(1, 0);
-		}, 400);
 	}
 
 	$scope.printver = 'Версия для печати';
@@ -247,43 +237,12 @@ app.controller("table", function($scope, $http){
 		let indx = lnk.indexOf('id-') + 3;
 		var cid = parseInt(lnk.slice(indx));
 		details(cid);
-
-		/********************Печатная версия карточки
-	=====================
-	*********************/
-		setTimeout(function(){
-            let lnk = window.location.href;
-            let indx = lnk.indexOf('id-') + 3;
-		    let cid = parseInt(lnk.slice(indx));
-            let linkid = 'https://www.metrotunnel.ru/reestr/printver/#id-' + cid;
-		    angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
-			angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
-		}, 1000);
-
-		setTimeout(function(){
-            let lnk = window.location.href;
-            let indx = lnk.indexOf('id-') + 3;
-		    let cid = parseInt(lnk.slice(indx));
-            let linkid = 'https://www.metrotunnel.ru/reestr/printver/#id-' + cid;
-		    angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
-			angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
-		}, 3500);
-
-		setTimeout(function(){
-            let lnk = window.location.href;
-            let indx = lnk.indexOf('id-') + 3;
-		    let cid = parseInt(lnk.slice(indx));
-            let linkid = 'https://www.metrotunnel.ru/reestr/printver/#id-' + cid;
-		    angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
-			angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
-		}, 6000);
-
 	}
 
 	function details(id){
 		var request = $http({
 			method: "post",
-			url: "list.php",
+			url: "https://www.proekttunnel.ru/wp-content/projapp/php/list.php",
 			data: {
 				'id': id
 				},
@@ -298,7 +257,7 @@ app.controller("table", function($scope, $http){
 		/**  Получаем имя в заголовок на всплюывающем окне **/	
 		var request = $http({
 			method: "post",
-			url: "one_upload.php",
+			url: "https://www.proekttunnel.ru/wp-content/projapp/php/one_upload.php",
 			data: {
 				'id': id
 				},
@@ -308,14 +267,12 @@ app.controller("table", function($scope, $http){
 			$scope.comp_details = response.data;
 		});		
 
-		setTimeout(mergecells,50);
-		setTimeout(mergecells,200);
-		setTimeout(mergecells,500);
-		setTimeout(mergecells,1000);
-
-		/******* Для медленных соединений **********/
-		setTimeout(mergecells,3500);
-		setTimeout(mergecells,5000);
+		/**** Запуск функции объединения ячеек после отображения инфо о компании 
+		======================================
+		*****/		
+		$scope.$on('ngRepeatFinished', function() {
+            mergecells(id);
+ 		});
 
 		/**** Отслеживание нажатий, установка положения кнопки вверх 
 		======================================
@@ -347,7 +304,7 @@ app.controller("table", function($scope, $http){
 		
 		var request = $http({
 			method: "post",
-			url: "one_upload.php",
+			url: "https://www.proekttunnel.ru/wp-content/projapp/php/one_upload.php",
 			data: {
 				'id': id
 				},
@@ -357,14 +314,12 @@ app.controller("table", function($scope, $http){
 			$scope.comp_details = response.data;
 		});
 		
-		setTimeout(mergecells,50);
-		setTimeout(mergecells,200);
-		setTimeout(mergecells,500);
-		setTimeout(mergecells,1000);
-
-		/******* Для медленных соединений **********/
-		setTimeout(mergecells,3500);
-		setTimeout(mergecells,5000);
+		/**** Запуск функции объединения ячеек после отображения инфо о компании 
+		======================================
+		*****/		
+		$scope.$on('ngRepeatFinished', function() {
+            mergecells(id);
+ 		});
 
 		/**** Отслеживание нажатий, установка положения кнопки вверх 
 		======================================
@@ -383,13 +338,6 @@ app.controller("table", function($scope, $http){
 		}else{
 			window.scrollTo(0, 360);
 		}
-
-	/********************Печатная версия карточки
-	=====================
-	*********************/
-		var linkid = 'http://www.metrotunnel.ru/reestr/printver/#id-' + id;
-		angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
-
 	};
 	/****(Окончание) Отслеживание нажатий, установка положения кнопки вверх 
 	======================================
@@ -416,7 +364,7 @@ app.controller("table", function($scope, $http){
 	/**** Заголовки во всплывающем окне 
 	======================================
 	*****/
-	function mergecells(){
+	function mergecells(id){
 		/** List of elements for categorizing **/
 		var col_ext = angular.element(document.querySelectorAll(".form_col_ext"));
 		var col_hide = angular.element(document.querySelectorAll(".form_col_hide"));
@@ -444,7 +392,14 @@ app.controller("table", function($scope, $http){
 			.addClass('popup_header');
 		col_hide.eq(i)
 			.css('display', 'none');
-		})
+		});
+
+		/********************Печатная версия карточки
+		=====================
+		*********************/
+    
+        let linkid = 'https://www.proekttunnel.ru/reestr/printver/#id-' + id;
+		angular.element(document.querySelectorAll('#linkprint')).attr('href', linkid);
 
 	}
 
@@ -458,6 +413,15 @@ app.controller("table", function($scope, $http){
 				var len_c = (lc - lc%30) / 30;
 			}
 			paginate(1, len_c);
+	}
+
+	/********************Close a popup window by pressing ESC
+		=====================
+		*********************/
+	window.onkeydown = function(e){
+		if(e.keyCode == 27){
+			$scope.hide();
+		}
 	}
 });
 	/**** Custom filters 
@@ -551,3 +515,18 @@ app.filter('filterByOGRN', function(){
 		return list;	
 	}
 });
+app.directive('onFinishRender',['$timeout', '$parse', function ($timeout, $parse) {
+    return {
+        restrict: 'A',
+        link: function (scope, element, attr) {
+            if (scope.$last === true) {
+                $timeout(function () {
+                    scope.$emit('ngRepeatFinished');
+                    if(!!attr.onFinishRender){
+                      $parse(attr.onFinishRender)(scope);
+                    }
+                });
+            }
+        }
+    }
+}]);
