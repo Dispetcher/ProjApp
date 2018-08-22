@@ -8,7 +8,7 @@
 		
 	<table>
 		<caption class="header_name">{{org_name}}</caption>
-		<tr ng-repeat="cd in comp_details">
+		<tr ng-repeat="cd in comp_details" on-finish-render="mergecells()">
 			<td class="form_col_ext">{{cd.COLNAME}}</td>
 			<td class="form_col_hide">{{cd.COLVALUE}}</td>
 		</tr>
